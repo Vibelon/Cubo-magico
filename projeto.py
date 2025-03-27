@@ -146,51 +146,59 @@ class Cubo:
             raise GerarExceção(f"{coluna} não é um número válido para uma coluna. Escolha uma coluna de 0 à 5.") #ajudar o dev a encontrar o erro kkkk
 
 
-    def movimento_f():
-        pass
+    def movimento_f(self):
+        self.rotacionar_no_sentido_horário_na_vertical(3)
 
-    def movimento_f_linha():
-        pass
+    def movimento_f_linha(self):
+        self.rotacionar_no_sentido_anti_horário_na_vertical(3)
 
-    def movimento_b():
-        pass
+    def movimento_b(self):
+        self.rotacionar_no_sentido_horário_na_vertical(5)
 
-    def movimento_b_linha():
-        pass
+    def movimento_b_linha(self):
+        self.rotacionar_no_sentido_anti_horário_na_vertical(3)
 
-    def movimento_u():
-        pass
+    def movimento_u(self):
+        self.rotacionar_no_sentido_horário_na_horizontal(0)
 
-    def movimento_u_linha():
-        pass
+    def movimento_u_linha(self):
+        self.rotacionar_no_sentido_anti_horário_na_horizontal(0)
 
-    def movimento_d():
-        pass
+    def movimento_d(self):
+        self.rotacionar_no_sentido_horário_na_horizontal(2)
 
-    def movimento_d_linha():
-        pass
+    def movimento_d_linha(self):
+        self.rotacionar_no_sentido_anti_horário_na_horizontal(2)
 
-    def movimento_l():
-        pass
+    def movimento_l(self):
+        self.rotacionar_no_sentido_horário_na_vertical(0)
 
-    def movimento_l_linha():
-        pass
+    def movimento_l_linha(self):
+        self.rotacionar_no_sentido_anti_horário_na_vertical(0)
 
-    def movimento_r():
-        pass
+    def movimento_r(self):
+        self.rotacionar_no_sentido_horário_na_vertical(2)
 
-    def movimento_r_linha():
-        pass
+    def movimento_r_linha(self):
+        self.rotacionar_no_sentido_anti_horário_na_horizontal(2)
 
-    def movimento_m():
-        pass
+    def movimento_m(self):
+        self.rotacionar_no_sentido_horário_na_vertical(1)
 
-    def movimento_e():
-        pass
+    def movimento_m_linha(self): #esse movimento não existe oficialmente. É mais por organização
+        self.rotacionar_no_sentido_anti_horário_na_vertical(1)
 
-    def movimento_s():
-        pass
+    def movimento_e(self):
+        self.rotacionar_no_sentido_horário_na_horizontal(1)
 
+    def movimento_e_linha(self):
+        self.rotacionar_no_sentido_anti_horário_na_horizontal(1)
+
+    def movimento_s(self):
+        self.rotacionar_no_sentido_horário_na_vertical(1)
+
+    def movimento_s_linha(self):
+        self.rotacionar_no_sentido_anti_horário_na_vertical(1)
 
 
     def definir_cubo(self): #Esta é a função em que nós criamos o nosso cubo
