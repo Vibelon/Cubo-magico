@@ -135,6 +135,7 @@ class Cubo:
         else:
             raise GerarExceção(f"{coluna} não é um número válido para uma coluna. Escolha uma coluna de 0 à 5.")
 
+
     def rotacionar_no_sentido_horário_na_vertical(self, coluna): #Vertical(🔼🔽)
 
         if coluna in [0,1,2,3,4,5]:
@@ -143,6 +144,7 @@ class Cubo:
             self.rotacionar_no_sentido_anti_horário_na_vertical(coluna)
         else:
             raise GerarExceção(f"{coluna} não é um número válido para uma coluna. Escolha uma coluna de 0 à 5.") #ajudar o dev a encontrar o erro kkkk
+
 
     def movimento_f():
         pass
@@ -156,7 +158,38 @@ class Cubo:
     def movimento_b_linha():
         pass
 
-    
+    def movimento_u():
+        pass
+
+    def movimento_u_linha():
+        pass
+
+    def movimento_d():
+        pass
+
+    def movimento_d_linha():
+        pass
+
+    def movimento_l():
+        pass
+
+    def movimento_l_linha():
+        pass
+
+    def movimento_r():
+        pass
+
+    def movimento_r_linha():
+        pass
+
+    def movimento_m():
+        pass
+
+    def movimento_e():
+        pass
+
+    def movimento_s():
+        pass
 
 
 
@@ -244,26 +277,3 @@ def count(elemento,lista : list): #Portugol não tem o método count, então sou
             quantidade = quantidade + 1
 
     return quantidade
-
-
-
-
-
-
-
-cubinho = Cubo()
-
-cubinho.definir_cubo()
-
-cubinho.mostrar_cubo()
-
-print(cubinho.verificar_se_está_resolvido())
-
-
-def instruções_para_montar_o_cubo(): #como o usuário deve numerar as faces
-    pass
-
-def main():
-    instruções_para_montar_o_cubo()
-
-
