@@ -5,12 +5,6 @@ class GerarExceção(Exception):
 class Cubo:
 
     def __init__(self):
-        #self.face0 = [[None,None,None],[None,None,None],[None,None,None]] #Portugol não possui listas dinâmicas, então preciso fazer assim para me aproximar ao máximo
-        #self.face1 = [[None,None,None],[None,None,None],[None,None,None]] #do portugol, com listas de tamanhos já pré definidos
-        #self.face2 = [[None,None,None],[None,None,None],[None,None,None]]
-        #self.face3 = [[None,None,None],[None,None,None],[None,None,None]]
-        #self.face4 = [[None,None,None],[None,None,None],[None,None,None]]
-        #self.face5 = [[None,None,None],[None,None,None],[None,None,None]]
 
         self.cubo = {
             0: [[None,None,None],[None,None,None],[None,None,None]],
