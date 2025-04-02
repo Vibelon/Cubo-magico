@@ -5,6 +5,12 @@ class GerarExceção(Exception):
 class Cubo:
 
     def __init__(self):
+        #self.face0 = [[None,None,None],[None,None,None],[None,None,None]] #Portugol não possui listas dinâmicas, então preciso fazer assim para me aproximar ao máximo
+        #self.face1 = [[None,None,None],[None,None,None],[None,None,None]] #do portugol, com listas de tamanhos já pré definidos
+        #self.face2 = [[None,None,None],[None,None,None],[None,None,None]]
+        #self.face3 = [[None,None,None],[None,None,None],[None,None,None]]
+        #self.face4 = [[None,None,None],[None,None,None],[None,None,None]]
+        #self.face5 = [[None,None,None],[None,None,None],[None,None,None]]
 
         self.cubo = {
             0: [[None,None,None],[None,None,None],[None,None,None]],
@@ -95,8 +101,6 @@ class Cubo:
             self.cubo[5][coluna][1] = coluna2[1]
             self.cubo[5][coluna][2] = coluna2[0]
 
-
-            
             
         elif coluna in [3,4,5]:
 
@@ -149,6 +153,60 @@ class Cubo:
             self.rotacionar_no_sentido_anti_horário_na_vertical(coluna)
         else:
             raise GerarExceção(f"{coluna} não é um número válido para uma coluna. Escolha uma coluna de 0 à 5.") #ajudar o dev a encontrar o erro kkkk
+
+
+    def verificar_se_a_cor_está_no_centro_da_face(self,face:list[list[str]],cor) -> bool:
+
+        if cor == face[1][1]:
+            return True
+        else:
+            return False
+        
+
+    def encontrar_o_centro(self,cor : str) -> int:
+        
+        f0 = self.verificar_se_a_cor_está_no_centro_da_face(self.cubo[0],cor)
+        f1 = self.verificar_se_a_cor_está_no_centro_da_face(self.cubo[1],cor)
+        f2 = self.verificar_se_a_cor_está_no_centro_da_face(self.cubo[2],cor)
+        f3 = self.verificar_se_a_cor_está_no_centro_da_face(self.cubo[3],cor)
+        f4 = self.verificar_se_a_cor_está_no_centro_da_face(self.cubo[4],cor)
+        f5 = self.verificar_se_a_cor_está_no_centro_da_face(self.cubo[5],cor)
+
+        if f0:
+            return 0
+        elif f1:
+            return 1
+        elif f2:
+            return 2
+        elif f3:
+            return 3
+        elif f4:
+            return 4
+        elif f5:
+            return 5
+        else:
+            raise GerarExceção("O cubo inserido é inválido")
+        
+
+    def copiar_o_cubo_inteiro():
+        pass
+
+
+    def girar_o_cubo_no_sentido_anti_horário_na_horizontal(self):
+        pass
+        
+
+
+    def girar_o_cubo_no_sentido_horário_na_horizontal(self):
+        pass
+
+
+    def girar_o_cubo_no_sentido_anti_horário_na_vertical(self):
+        pass
+
+
+    def girar_o_cubo_no_sentido_horário_na_vertical(self):
+        pass
 
 
     def movimento_f(self):
@@ -208,50 +266,21 @@ class Cubo:
 
     def resolver_o_cubo(self):
 
-        def encontrar_o_centro(cor : str) -> int:
-
-            def verificar_se_a_cor_está_no_centro_da_face(face:list[list[str]]) -> bool:
-
-                if cor == face[1][1]:
-                    return True
-                else:
-                    return False
-            
-            f0 = verificar_se_a_cor_está_no_centro_da_face(self.cubo[0])
-            f1 = verificar_se_a_cor_está_no_centro_da_face(self.cubo[1])
-            f2 = verificar_se_a_cor_está_no_centro_da_face(self.cubo[2])
-            f3 = verificar_se_a_cor_está_no_centro_da_face(self.cubo[3])
-            f4 = verificar_se_a_cor_está_no_centro_da_face(self.cubo[4])
-            f5 = verificar_se_a_cor_está_no_centro_da_face(self.cubo[5])
-
-            if f0:
-                return 0
-            elif f1:
-                return 1
-            elif f2:
-                return 2
-            elif f3:
-                return 3
-            elif f4:
-                return 4
-            elif f5:
-                return 5
-            else:
-                raise GerarExceção("O cubo inserido é inválido")
-            
         print("==================Passos para resolver o cubo==================")
         print("1. Deixe a face com o centro amarelo virada para cima e a face com o centro azul virada para você")
         print("2. A face com o centro azul será a face 0")
 
 
-        amarelo = encontrar_o_centro("amarelo")
-        branco = encontrar_o_centro("branco")
+        amarelo = self.encontrar_o_centro("amarelo")
+        branco = self.encontrar_o_centro("branco")
 
-        verde = encontrar_o_centro("verde")
-        azul = encontrar_o_centro("azul")
+        verde = self.encontrar_o_centro("verde")
+        azul = self.encontrar_o_centro("azul")
 
-        amarelo = encontrar_o_centro("vermelho")
-        amarelo = encontrar_o_centro("laranja")
+        amarelo = self.encontrar_o_centro("vermelho")
+        amarelo = self.encontrar_o_centro("laranja")
+
+
 
             
         
@@ -341,3 +370,63 @@ def count(elemento,lista : list): #Portugol não tem o método count, então sou
             quantidade = quantidade + 1
 
     return quantidade
+
+
+def copy(objeto : dict | list): #portugol não tem suporte padrão ao copy. por esta razão estou recriando-o
+
+    if type(objeto) == dict:
+
+        chaves = objeto.keys()
+
+        cópia = {}
+
+        for chave in chaves:
+
+            cópia[chave] = objeto[chave]
+
+
+    elif type(objeto) == list:
+
+        cópia = []
+
+        for elemento in objeto:
+            cópia.append(elemento)
+   
+    else:
+        raise GerarExceção("Por favor insira um dado do tipo correto (list ou dict)")
+    
+    return cópia
+
+
+def deepcopy(objeto : dict | list):
+
+    if type(objeto) == dict:
+
+        chaves = objeto.keys()
+
+        cópia = {}
+
+        for chave in chaves:
+            
+            cópia[chave] = deepcopy(cópia[chave])  # Chamada recursiva para garantir cópia profunda
+
+        recursão = 0
+
+        return cópia
+
+    elif type(objeto) == list:
+
+        cópia = []
+
+        for elemento in objeto:
+
+            if type(elemento) == list or type(elemento) == dict:
+                cópia.append(deepcopy(elemento))  # Chamada recursiva para garantir cópia profunda
+            else:
+                
+                cópia.append(elemento)
+
+        return cópia
+
+    else:
+        return objeto
