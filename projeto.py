@@ -398,9 +398,10 @@ def copy(objeto : dict | list): #portugol não tem suporte padrão ao copy. por 
     return cópia
 
 
+
 def deepcopy(objeto : dict | list):
 
-    if type(objeto) == dict:
+    if type(objeto) == dict: #<<<<<<<<<<<<<<<<<<<<testar
 
         chaves = objeto.keys()
 
@@ -408,9 +409,8 @@ def deepcopy(objeto : dict | list):
 
         for chave in chaves:
             
-            cópia[chave] = deepcopy(cópia[chave])  # Chamada recursiva para garantir cópia profunda
+            cópia[chave] = deepcopy(objeto[chave])  # Chamada recursiva para garantir cópia profunda
 
-        recursão = 0
 
         return cópia
 
