@@ -386,6 +386,12 @@ class Cubo:
         coordenadas.append(self.encontrar_na_face_os_meios_da_cor_na_camada(cor,1,self.cubo[3]))
         coordenadas[3].append(3)
 
+        coordenadas.append(self.encontrar_na_face_os_meios_da_cor_na_camada(cor,1,self.cubo[4]))
+        coordenadas[4].append(4)
+
+        coordenadas.append(self.encontrar_na_face_os_meios_da_cor_na_camada(cor,1,self.cubo[4]))
+        coordenadas[5].append(5)
+
         coordenadas_lista = []
 
         for coordenada in coordenadas:
@@ -402,6 +408,37 @@ class Cubo:
         return coordenadas_lista
 
 
+    def verificar_se_a_cruz_branca_foi_afetada(self,face_atual,face_anterior):
+
+        coordenadas = [] #lista de pontos que teremos que comparar com a face atual, estas serão as coordenadas em que estão presentes os meios brancos
+        #caso esteja presente na face anterior, mas não na face atual, então isso indica que a cruz branca foi afetada
+
+        if face_anterior[0][1] == "branco":
+            coordenadas.append([0,1])
+
+        if face_anterior[1][0] == "branco":
+            coordenadas.append([1,0])
+
+        if face_anterior[1][2] == "branco":
+            coordenadas.append([1,2])
+
+        if face_anterior[2][1] == "branco":
+            coordenadas.append([2,1])
+
+        acertos = 0 #esta variável irá definir quantos meios brancos permaneceram no mesmo lugar. se algum tiver mudado de lugar, isso significa que a
+        #cruz branca foi afetada
+
+        for coordenada in coordenadas:
+
+            if face_anterior[coordenada[0],coordenada[1]] == face_anterior[coordenada[0],coordenada[1]]:
+                acertos = acertos + 1
+
+        if acertos == len(coordenadas): #ou seja, se nenhum dos quadrados brancos presentes na face anterior foram alterados
+            return False #a cruz branca não foi afetada
+        else:
+            return True #a cruz branca foi afetada
+        
+
     def preparar_a_cruz_branca(self):
         
         if self.verificar_se_a_cruz_branca_está_pronta(): #só iremos formar a cruz branca se ela ainda não estiver formada
@@ -412,7 +449,9 @@ class Cubo:
 
             for coordenada in coordenadas:
 
-                del coordenada["camada"]
+                face_anterior = deepcopy(self.cubo[4]) #estamos salvando a face 4 para que póssamos utilizar a função verificar_se_a_cruz_branca_foi_afetada
+
+                del coordenada["camada"] #não precisaremos desta informação agora
 
 
                 if coordenada["face"] == 0:
@@ -423,32 +462,58 @@ class Cubo:
                     sentido = 0 #isso indica que temos que girar no sentido anti horário. estamos usando números, pois eles são menos propensos
                     #a erros
 
+                    vezes = 1 #quantas vezes precisaremos fazer este movimento para que a peça branca vá para o topo
+
                 elif coordenada["face"] == 1:
                     peso = 3
                     sentido = 0
+                    vezes = 1
 
                 elif coordenada["face"] == 2:
                     peso = 0
                     sentido = 1
+                    vezes = 1
 
                 elif coordenada["face"] == 3:
                     peso = 3
                     sentido = 1
+                    vezes = 1
+
+                elif coordenada["face"] == 4: #neste caso em específico nós não precisamos fazer nada na face 4
+                    continue
+
+                elif coordenada["face"] == 5:
+                    peso = 0
+                    sentido = 0
+                    vezes = 2
 
 
                 if coordenada["coluna1"] != None:
 
                     if sentido == 0:
-                        self.rotacionar_uma_coluna_no_sentido_anti_horário_na_vertical(coordenada["coluna1"] + peso)
+                        for _ in range(0,vezes):
+                            self.rotacionar_uma_coluna_no_sentido_anti_horário_na_vertical(coordenada["coluna1"] + peso)
+
+                            if self.verificar_se_a_cruz_branca_foi_afetada(self.cubo[4],face_anterior): #se ela tiver sido afetada
+                                
+                                self.rotacionar_uma_coluna_no_sentido_horário_na_vertical(coordenada["coluna1"] + peso) #desfazendo o movimento
+
+                            #continuar aqui <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+                                
+                            else: 
+                                pass
                     else:
-                        self.rotacionar_uma_coluna_no_sentido_horário_na_vertical(coordenada["coluna1"] + peso)
+                        for _ in range(0,vezes):
+                            self.rotacionar_uma_coluna_no_sentido_horário_na_vertical(coordenada["coluna1"] + peso)
 
                 if coordenada["coluna2"] != None: 
 
                     if sentido == 0:
-                        self.rotacionar_uma_coluna_no_sentido_anti_horário_na_vertical(coordenada["coluna2"] + peso)
+                        for _ in range(0,vezes):
+                            self.rotacionar_uma_coluna_no_sentido_anti_horário_na_vertical(coordenada["coluna2"] + peso)
                     else:
-                        self.rotacionar_uma_coluna_no_sentido_horário_na_vertical(coordenada["coluna2"] + peso)
+                        for _ in range(0,vezes):
+                            self.rotacionar_uma_coluna_no_sentido_horário_na_vertical(coordenada["coluna2"] + peso)
 
 
 
